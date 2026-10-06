@@ -6,6 +6,7 @@ from components.navigation.sidebar_component import SidebarComponent
 from components.views.empty_view_component import EmptyViewComponent
 from pages.base_page import BasePage
 
+
 class CoursesListPage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
@@ -13,9 +14,9 @@ class CoursesListPage(BasePage):
         self.navbar = NavbarComponent(page)
         self.sidebar = SidebarComponent(page)
         self.toolbar_view = CoursesListToolbarViewComponent(page)
-        self.empty_view = EmptyViewComponent(page, 'courses-list')
+        self.empty_view = EmptyViewComponent(page)
         self.course_view = CourseViewComponent(page)
 
     def check_visible_empty_view(self):
-        self.empty_view.check_visible(title='There is no results',
+        self.empty_view.check_visible(identifier='courses-list', title='There is no results',
                                       description='Results from the load test pipeline will be displayed here')

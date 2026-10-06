@@ -2,19 +2,21 @@ import pytest
 from pages.courses_list_page import CoursesListPage
 from pages.create_course_page import CreateCoursePage
 
+
 @pytest.mark.regression
 @pytest.mark.courses
 def test_create_courses(create_course_page: CreateCoursePage, courses_list_page: CoursesListPage):
     create_course_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create')
 
     create_course_page.create_course_toolbar_view.check_visible()
-    create_course_page.image_upload_widget.check_visible(is_image_uploaded=False)
+    create_course_page.image_upload_widget.check_visible(is_image_uploaded=False, identifier='create-course-preview')
     create_course_page.create_course_form.check_visible(title='', estimated_time='', description='', max_score='0',
                                                         min_score='0')
     create_course_page.create_course_exercise_toolbar_view.check_visible()
     create_course_page.check_visible_exercise_empty_view()
-    create_course_page.image_upload_widget.upload_preview_image(file='./testdata/files/image.png')
-    create_course_page.image_upload_widget.check_visible(is_image_uploaded=True)
+    create_course_page.image_upload_widget.upload_preview_image(file='./testdata/files/image.png',
+                                                                identifier='create-course-preview')
+    create_course_page.image_upload_widget.check_visible(is_image_uploaded=True, identifier='create-course-preview')
     create_course_page.create_course_form.fill(
         title="Playwright",
         estimated_time="2 weeks",
@@ -39,6 +41,7 @@ def test_create_courses(create_course_page: CreateCoursePage, courses_list_page:
         max_score="100",
         min_score="10",
     )
+
 
 @pytest.mark.courses
 @pytest.mark.regression
